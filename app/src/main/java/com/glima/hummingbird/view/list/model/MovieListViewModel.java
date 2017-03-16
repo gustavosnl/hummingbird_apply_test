@@ -1,6 +1,6 @@
 package com.glima.hummingbird.view.list.model;
 
-import com.glima.hummingbird.model.Film;
+import com.glima.hummingbird.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +9,15 @@ import java.util.List;
  * Created by gustavo on 15/03/17.
  */
 
-public class FilmListViewModel {
+public class MovieListViewModel {
 
-    private List<Film> films = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
 
-    public FilmListViewModel(List<Film> films) {
-        this.films.addAll(films);
+    public MovieListViewModel(List<Movie> movies) {
+        this.movies.addAll(movies);
     }
 
-    public List<Film> getFilms() {
-        return films;
+    public List<Movie> getMovies() {
+        return movies;
     }
 }

@@ -4,7 +4,7 @@ package com.glima.hummingbird.model;
  * Created by gustavo on 14/03/17.
  */
 
-public class Film {
+public class Movie {
 
     private String id;
     private String title;
@@ -12,7 +12,7 @@ public class Film {
     private String poster;
     private String date;
 
-    public Film(String id, String title, String overview, String poster, String date) {
+    public Movie(String id, String title, String overview, String poster, String date) {
         this.id = id;
         this.title = title;
         this.overview = overview;
