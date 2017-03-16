@@ -1,6 +1,6 @@
 package com.glima.hummingbird.network;
 
-import com.glima.hummingbird.model.Film;
+import com.glima.hummingbird.model.Movie;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface FilmsCallBack {
 
-    void onFetchFilmsCompleted(List<Film> films);
+    void onFetchFilmsCompleted(List<Movie> movies);
 
     void onFetchFilmsError();
 }

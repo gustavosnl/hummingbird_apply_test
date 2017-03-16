@@ -3,7 +3,7 @@ package com.glima.hummingbird.network;
 import android.os.AsyncTask;
 
 import com.glima.hummingbird.BuildConfig;
-import com.glima.hummingbird.model.Film;
+import com.glima.hummingbird.model.Movie;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,7 +15,7 @@ import static com.glima.hummingbird.BuildConfig.API_URL;
  * Created by gustavo on 14/03/17.
  */
 
-public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Film>> {
+public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Movie>> {
 
     private final String API_KEY = "?api_key=".concat(BuildConfig.API_KEY);
     private final String POPULAR_FILMS_PATH = "discover/movie";
@@ -28,7 +28,7 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Film>> {
     }
 
     @Override
-    protected List<Film> doInBackground(String... params) {
+    protected List<Movie> doInBackground(String... params) {
         try {
             URL url = new URL(API_URL
                     .concat(POPULAR_FILMS_PATH)
@@ -47,8 +47,8 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Film>> {
     }
 
     @Override
-    protected void onPostExecute(List<Film> films) {
-        super.onPostExecute(films);
-        mCallBack.onFetchFilmsCompleted(films);
+    protected void onPostExecute(List<Movie> movies) {
+        super.onPostExecute(movies);
+        mCallBack.onFetchFilmsCompleted(movies);
     }
 }

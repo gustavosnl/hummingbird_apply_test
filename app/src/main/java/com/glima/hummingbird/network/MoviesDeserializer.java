@@ -1,6 +1,6 @@
 package com.glima.hummingbird.network;
 
-import com.glima.hummingbird.model.Film;
+import com.glima.hummingbird.model.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class FilmsDeserializer {
 
-    public static List<Film> deserialize(InputStream inputStream) throws JSONException, IOException {
+    public static List<Movie> deserialize(InputStream inputStream) throws JSONException, IOException {
 
         BufferedInputStream stream = new BufferedInputStream(inputStream);
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
@@ -34,11 +34,11 @@ public class FilmsDeserializer {
         JSONObject json = new JSONObject(output.toString());
         JSONArray jsonArray = json.getJSONArray("results");
 
-        List<Film> films = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < json.getJSONArray("results").length(); i++) {
             JSONObject jsonFilm = jsonArray.getJSONObject(i);
 
-            films.add(new Film(
+            movies.add(new Movie(
                     jsonFilm.getString("id"),
                     jsonFilm.getString("title"),
                     jsonFilm.getString("overview"),
@@ -46,6 +46,6 @@ public class FilmsDeserializer {
                     jsonFilm.getString("release_date")));
         }
 
-        return films;
+        return movies;
     }
 }
