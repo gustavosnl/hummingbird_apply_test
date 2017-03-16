@@ -1,15 +1,10 @@
 package com.glima.hummingbird.network;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.glima.hummingbird.BuildConfig;
 import com.glima.hummingbird.model.Film;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -26,7 +21,11 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Film>> {
     private final String POPULAR_FILMS_PATH = "discover/movie";
     private final String SORT_ASC_QUERY_PARAMETER = "&sort_by=popularity.desc";
     private HttpURLConnection urlConnection;
-    private Context mContext;
+    private final FilmsCallBack mCallBack;
+
+    public ListPopularFilmsTask(FilmsCallBack callBack) {
+        mCallBack = callBack;
+    }
 
     @Override
     protected List<Film> doInBackground(String... params) {
@@ -40,24 +39,16 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Film>> {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(urlConnection.getInputStream()));
+          return FilmsDeserializer.deserialize(urlConnection.getInputStream());
 
-            StringBuffer json = new StringBuffer(1024);
-            String tmp = "";
-            while ((tmp = reader.readLine()) != null)
-                json.append(tmp);
-            reader.close();
-
-            urlConnection.disconnect();
-
-            JSONObject jsonObject = new JSONObject();
-
-
-            return (List<Film>) new JSONObject(json.toString());
         } catch (Exception e) {
             return null;
         }
     }
 
+    @Override
+    protected void onPostExecute(List<Film> films) {
+        super.onPostExecute(films);
+        mCallBack.onFetchFilmsCompleted(films);
+    }
 }
