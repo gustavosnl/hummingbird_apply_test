@@ -18,7 +18,7 @@ import java.util.List;
  * Created by gustavo on 15/03/17.
  */
 
-public class FilmsDeserializer {
+public class MoviesDeserializer {
 
     public static List<Movie> deserialize(InputStream inputStream) throws JSONException, IOException {
 
@@ -36,14 +36,14 @@ public class FilmsDeserializer {
 
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < json.getJSONArray("results").length(); i++) {
-            JSONObject jsonFilm = jsonArray.getJSONObject(i);
+            JSONObject jsonMovie = jsonArray.getJSONObject(i);
 
             movies.add(new Movie(
-                    jsonFilm.getString("id"),
-                    jsonFilm.getString("title"),
-                    jsonFilm.getString("overview"),
-                    jsonFilm.getString("poster_path"),
-                    jsonFilm.getString("release_date")));
+                    jsonMovie.getString("id"),
+                    jsonMovie.getString("title"),
+                    jsonMovie.getString("overview"),
+                    jsonMovie.getString("poster_path"),
+                    jsonMovie.getString("release_date")));
         }
 
         return movies;

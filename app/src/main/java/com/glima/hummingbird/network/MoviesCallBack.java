@@ -8,9 +8,9 @@ import java.util.List;
  * Created by gustavo on 15/03/17.
  */
 
-public interface FilmsCallBack {
+public interface MoviesCallBack {
 
-    void onFetchFilmsCompleted(List<Movie> movies);
+    void onFetchMoviesCompleted(List<Movie> movies);
 
-    void onFetchFilmsError();
+    void onFetchMoviesError();
 }

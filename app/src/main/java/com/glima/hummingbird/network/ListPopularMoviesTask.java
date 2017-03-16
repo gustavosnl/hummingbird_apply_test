@@ -15,15 +15,15 @@ import static com.glima.hummingbird.BuildConfig.API_URL;
  * Created by gustavo on 14/03/17.
  */
 
-public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Movie>> {
+public class ListPopularMoviesTask extends AsyncTask<String, Void, List<Movie>> {
 
     private final String API_KEY = "?api_key=".concat(BuildConfig.API_KEY);
-    private final String POPULAR_FILMS_PATH = "discover/movie";
-    private final String SORT_ASC_QUERY_PARAMETER = "&sort_by=popularity.desc";
+    private final String POPULAR_Movies_PATH = "discover/movie";
+    private final String SORT_DESC_QUERY_PARAMETER = "&sort_by=popularity.desc";
     private HttpURLConnection urlConnection;
-    private final FilmsCallBack mCallBack;
+    private final MoviesCallBack mCallBack;
 
-    public ListPopularFilmsTask(FilmsCallBack callBack) {
+    public ListPopularMoviesTask(MoviesCallBack callBack) {
         mCallBack = callBack;
     }
 
@@ -31,15 +31,15 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Movie>> {
     protected List<Movie> doInBackground(String... params) {
         try {
             URL url = new URL(API_URL
-                    .concat(POPULAR_FILMS_PATH)
+                    .concat(POPULAR_Movies_PATH)
                     .concat(API_KEY)
-                    .concat(SORT_ASC_QUERY_PARAMETER));
+                    .concat(SORT_DESC_QUERY_PARAMETER));
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-          return FilmsDeserializer.deserialize(urlConnection.getInputStream());
+          return MoviesDeserializer.deserialize(urlConnection.getInputStream());
 
         } catch (Exception e) {
             return null;
@@ -49,6 +49,6 @@ public class ListPopularFilmsTask extends AsyncTask<String, Void, List<Movie>> {
     @Override
     protected void onPostExecute(List<Movie> movies) {
         super.onPostExecute(movies);
-        mCallBack.onFetchFilmsCompleted(movies);
+        mCallBack.onFetchMoviesCompleted(movies);
     }
 }
