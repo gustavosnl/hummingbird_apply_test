@@ -1,3 +1,5 @@
 <resources>
     <dimen name="default_list_margin">8dp</dimen>
+    <dimen name="half_default_separator">4dp</dimen>
+    <dimen name="list_default_separator">8dp</dimen>
 </resources>

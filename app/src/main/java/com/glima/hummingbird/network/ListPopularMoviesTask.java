@@ -15,31 +15,39 @@ import static com.glima.hummingbird.BuildConfig.API_URL;
  * Created by gustavo on 14/03/17.
  */
 
-public class ListPopularMoviesTask extends AsyncTask<String, Void, List<Movie>> {
+public class ListPopularMoviesTask extends AsyncTask<Integer, Void, List<Movie>> {
 
     private final String API_KEY = "?api_key=".concat(BuildConfig.API_KEY);
-    private final String POPULAR_Movies_PATH = "discover/movie";
-    private final String SORT_DESC_QUERY_PARAMETER = "&sort_by=popularity.desc";
-    private HttpURLConnection urlConnection;
+    private final String POPULAR_MOVIES_PATH = "discover/movie";
+    private final String SORT_DESC_QUERY = "&sort_by=popularity.desc";
+    private final String PAGE_QUERY = "&page=";
+    private HttpURLConnection mUrlConnection;
     private final MoviesCallBack mCallBack;
+    private String mPage = "1";
 
     public ListPopularMoviesTask(MoviesCallBack callBack) {
         mCallBack = callBack;
+
     }
 
     @Override
-    protected List<Movie> doInBackground(String... params) {
+    protected List<Movie> doInBackground(Integer... params) {
+        if (params != null) {
+            mPage = String.valueOf(params[0]);
+        }
+
         try {
             URL url = new URL(API_URL
-                    .concat(POPULAR_Movies_PATH)
+                    .concat(POPULAR_MOVIES_PATH)
                     .concat(API_KEY)
-                    .concat(SORT_DESC_QUERY_PARAMETER));
+                    .concat(PAGE_QUERY.concat(mPage))
+                    .concat(SORT_DESC_QUERY));
 
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
+            mUrlConnection = (HttpURLConnection) url.openConnection();
+            mUrlConnection.setRequestMethod("GET");
+            mUrlConnection.connect();
 
-          return MoviesDeserializer.deserialize(urlConnection.getInputStream());
+          return MoviesDeserializer.deserialize(mUrlConnection.getInputStream());
 
         } catch (Exception e) {
             return null;
@@ -48,7 +56,6 @@ public class ListPopularMoviesTask extends AsyncTask<String, Void, List<Movie>> 
 
     @Override
     protected void onPostExecute(List<Movie> movies) {
-        super.onPostExecute(movies);
         mCallBack.onFetchMoviesCompleted(movies);
     }
 }
