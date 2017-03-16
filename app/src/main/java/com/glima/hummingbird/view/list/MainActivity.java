@@ -1,31 +1,35 @@
-package com.glima.hummingbird.view;
+package com.glima.hummingbird.view.list;
 
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.glima.hummingbird.R;
 import com.glima.hummingbird.databinding.ActivityMainBinding;
-import com.glima.hummingbird.model.Film;
-import com.glima.hummingbird.network.FilmsCallBack;
-import com.glima.hummingbird.network.ListPopularFilmsTask;
+import com.glima.hummingbird.model.Movie;
+import com.glima.hummingbird.network.MoviesCallBack;
+import com.glima.hummingbird.network.ListPopularMoviesTask;
+import com.glima.hummingbird.view.BaseActivity;
+import com.glima.hummingbird.view.list.model.MovieListViewModel;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements FilmsCallBack {
+public class MainActivity extends BaseActivity implements MoviesCallBack {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-    }
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
 
     @Override
     protected void init() {
-        new ListPopularFilmsTask(this).execute();
 
+        progressBar = ((ActivityMainBinding) viewDataBinding).progressBar;
+        recyclerView = ((ActivityMainBinding) viewDataBinding).movieList;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.column_span_count)));
+        recyclerView.setAdapter(new MoviesAdapter());
+
+        new ListPopularMoviesTask(this).execute();
     }
 
     @Override
@@ -40,12 +44,15 @@ public class MainActivity extends BaseActivity implements FilmsCallBack {
     }
 
     @Override
-    public void onFetchFilmsCompleted(List<Film> films) {
-        List<Film> filmsList = films;
+    public void onFetchMoviesCompleted(List<Movie> movies) {
+        MovieListViewModel viewModel = new MovieListViewModel(movies);
+        ((MoviesAdapter) recyclerView.getAdapter()).attachViewModel(viewModel);
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onFetchFilmsError() {
+    public void onFetchMoviesError() {
 
     }
 }

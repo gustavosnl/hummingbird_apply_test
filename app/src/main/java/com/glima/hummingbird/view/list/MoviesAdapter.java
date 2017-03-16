@@ -1,69 +1,61 @@
 package com.glima.hummingbird.view.list;
 
-import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.glima.hummingbird.R;
-import com.glima.hummingbird.model.Film;
-import com.glima.hummingbird.view.list.item.FilmItemViewModel;
-import com.glima.hummingbird.view.list.model.FilmListViewModel;
+import com.glima.hummingbird.databinding.ViewCardMovieBinding;
+import com.glima.hummingbird.model.Movie;
+import com.glima.hummingbird.view.list.item.MovieItemViewModel;
+import com.glima.hummingbird.view.list.model.MovieListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.databinding.DataBindingUtil.inflate;
+import static android.view.LayoutInflater.from;
 
 /**
  * Created by gustavo on 15/03/17.
  */
 
-public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmItemViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieItemViewHolder> {
 
-    private List<Film> films = new ArrayList<>();
-    private Context context;
+    private List<Movie> movies = new ArrayList<>();
 
-    public FilmsAdapter(Context context) {
-        this.context = context;
+    @Override
+    public MovieItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new MovieItemViewHolder(inflate(from(parent.getContext()), R.layout.view_card_movie, parent, false));
     }
 
     @Override
-    public FilmItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new FilmItemViewHolder(DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.view_card__film, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(FilmItemViewHolder holder, int position) {
-        holder.attachTVFilm(films.get(position));
+    public void onBindViewHolder(MovieItemViewHolder holder, int position) {
+        holder.attachMovie(movies.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return films.size();
+        return movies.size();
     }
 
-    public void attachViewModel(FilmListViewModel viewModel) {
-        films.addAll(viewModel.getFilms());
+    public void attachViewModel(MovieListViewModel viewModel) {
+        movies.addAll(viewModel.getMovies());
         notifyDataSetChanged();
     }
 
-    class FilmItemViewHolder extends RecyclerView.ViewHolder {
+    class MovieItemViewHolder extends RecyclerView.ViewHolder {
         ViewDataBinding viewDataBinding;
-        FilmItemViewModel viewModel;
+        MovieItemViewModel viewModel;
 
-        public FilmItemViewHolder(ViewDataBinding viewDataBinding) {
+        public MovieItemViewHolder(ViewDataBinding viewDataBinding) {
             super(viewDataBinding.getRoot());
             this.viewDataBinding = viewDataBinding;
-            itemView.setOnClickListener(this);
         }
 
-        public void attachTVFilm(Film film) {
-            viewModel = new FilmItemViewModel(film);
-            ((ViewCardFilmBinding) viewDataBinding).setTvFilm(viewModel);
+        public void attachMovie(Movie movie) {
+            viewModel = new MovieItemViewModel(movie);
+            ((ViewCardMovieBinding) viewDataBinding).setMovie(viewModel);
         }
-
     }
 }
