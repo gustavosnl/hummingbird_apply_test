@@ -13,7 +13,7 @@ import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.ListPopularMoviesTask;
 import com.glima.hummingbird.network.MoviesCallBack;
 import com.glima.hummingbird.view.BaseActivity;
-import com.glima.hummingbird.view.list.model.MovieListViewModel;
+import com.glima.hummingbird.view.model.MovieListViewModel;
 
 import java.util.List;
 
@@ -21,7 +21,6 @@ public class MainActivity extends BaseActivity implements MoviesCallBack, OnScro
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private OnScrollListener mScrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,7 @@ public class MainActivity extends BaseActivity implements MoviesCallBack, OnScro
         recyclerView.addItemDecoration(new ListDividerDecoration(this));
         recyclerView.setAdapter(new MoviesAdapter());
         recyclerView.addOnScrollListener(new OnScrollListener(this));
+
         new ListPopularMoviesTask(this).execute(1);
     }
 
@@ -66,6 +66,5 @@ public class MainActivity extends BaseActivity implements MoviesCallBack, OnScro
     @Override
     public void loadNextPage(int page) {
         new ListPopularMoviesTask(this).execute(page);
-
     }
 }

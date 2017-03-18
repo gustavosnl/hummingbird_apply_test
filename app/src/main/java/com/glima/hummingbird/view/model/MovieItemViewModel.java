@@ -8,6 +8,7 @@ import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.ImageCallBack;
 import com.glima.hummingbird.network.LoadThumbnailTask;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ import static java.util.Locale.US;
  * Created by gustavo on 16/03/17.
  */
 
-public class MovieItemViewModel {
+public class MovieItemViewModel implements Serializable{
 
     private Movie movie;
     private static CallbackHandler handler;
