@@ -43,6 +43,7 @@ public class MoviesDeserializer {
                     jsonMovie.getString("title"),
                     jsonMovie.getString("overview"),
                     jsonMovie.getString("poster_path"),
+                    jsonMovie.getString("backdrop_path"),
                     jsonMovie.getString("release_date")));
         }
 

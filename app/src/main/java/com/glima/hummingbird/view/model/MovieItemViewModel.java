@@ -1,4 +1,4 @@
-package com.glima.hummingbird.view.list.item;
+package com.glima.hummingbird.view.model;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.ImageCallBack;
-import com.glima.hummingbird.network.LoadThumbnailTask;
+import com.glima.hummingbird.network.LoadImageTask;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -20,7 +20,7 @@ import static java.util.Locale.US;
  * Created by gustavo on 16/03/17.
  */
 
-public class MovieItemViewModel implements Serializable{
+public class MovieItemViewModel implements Serializable {
 
     private Movie movie;
     private static CallbackHandler handler;
@@ -44,13 +44,26 @@ public class MovieItemViewModel implements Serializable{
         }
     }
 
+    public String getOverview() {
+        return movie.getOverview();
+    }
+
     public String getThumbnailUrl() {
-        return API_IMG_URL.concat(movie.getPoster());
+        return API_IMG_URL.concat(movie.getThumbnail());
     }
 
     @BindingAdapter({"bind:thumbnailUrl"})
     public static void loadThumbnailImage(ImageView view, String imageUrl) {
-        new LoadThumbnailTask(handler, view).execute(imageUrl);
+        new LoadImageTask(handler, view).execute(imageUrl);
+    }
+
+    public String getPosterUrl() {
+        return API_IMG_URL.concat(movie.getPoster());
+    }
+
+    @BindingAdapter({"bind:posterUrl"})
+    public static void loadPosterImage(ImageView view, String imageUrl) {
+        new LoadImageTask(handler, view).execute(imageUrl);
     }
 
     class CallbackHandler implements ImageCallBack {
