@@ -2,5 +2,7 @@
     <string name="app_name">HummingBird Application Test</string>
     <string name="label_sinopsys">Synopsis</string>
     <string name="launch_year">year: %s</string>
+    <string name="search_title">Search for a Movie</string>
+    <string name="search_hint">search</string>
 
 </resources>

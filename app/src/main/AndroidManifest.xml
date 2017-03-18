@@ -11,26 +11,52 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".view.list.SearchResultListActivity" />
+
         <activity
-            android:name=".view.list.MainActivity"
+            android:name=".view.list.PopularFilmsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
 
         <activity
             android:name=".view.detail.MovieDetailsActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.glima.hummingbird.view.list.MainActivity">
+            android:parentActivityName="com.glima.hummingbird.view.list.PopularFilmsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.list.MainActivity" />
+                android:value=".view.list.PopularFilmsActivity" />
+        </activity>
+
+        <activity
+            android:name=".view.list.SearchResultListActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.list.SearchResultListActivity" />
+
         </activity>
     </application>
 
