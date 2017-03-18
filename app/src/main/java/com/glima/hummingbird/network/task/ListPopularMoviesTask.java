@@ -1,12 +1,15 @@
-package com.glima.hummingbird.network;
+package com.glima.hummingbird.network.task;
 
 import android.os.AsyncTask;
 
 import com.glima.hummingbird.BuildConfig;
 import com.glima.hummingbird.model.Movie;
+import com.glima.hummingbird.network.MoviesCallBack;
+import com.glima.hummingbird.network.deserialize.MoviesDeserializer;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.glima.hummingbird.BuildConfig.API_URL;
@@ -27,7 +30,6 @@ public class ListPopularMoviesTask extends AsyncTask<Integer, Void, List<Movie>>
 
     public ListPopularMoviesTask(MoviesCallBack callBack) {
         mCallBack = callBack;
-
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ListPopularMoviesTask extends AsyncTask<Integer, Void, List<Movie>>
           return MoviesDeserializer.deserialize(mUrlConnection.getInputStream());
 
         } catch (Exception e) {
-            return null;
+            return new ArrayList<>();
         }
     }
 

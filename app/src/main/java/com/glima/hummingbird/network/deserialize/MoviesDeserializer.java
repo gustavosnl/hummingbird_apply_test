@@ -1,4 +1,4 @@
-package com.glima.hummingbird.network;
+package com.glima.hummingbird.network.deserialize;
 
 import com.glima.hummingbird.model.Movie;
 
@@ -39,12 +39,12 @@ public class MoviesDeserializer {
             JSONObject jsonMovie = jsonArray.getJSONObject(i);
 
             movies.add(new Movie(
-                    jsonMovie.getString("id"),
-                    jsonMovie.getString("title"),
-                    jsonMovie.getString("overview"),
-                    jsonMovie.getString("poster_path"),
-                    jsonMovie.getString("backdrop_path"),
-                    jsonMovie.getString("release_date")));
+                    jsonMovie.optString("id"),
+                    jsonMovie.optString("title"),
+                    jsonMovie.optString("overview"),
+                    jsonMovie.optString("poster_path"),
+                    jsonMovie.optString("backdrop_path"),
+                    jsonMovie.optString("release_date")));
         }
 
         return movies;
