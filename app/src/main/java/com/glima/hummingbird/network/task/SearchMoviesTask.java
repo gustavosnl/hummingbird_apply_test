@@ -46,7 +46,7 @@ public class SearchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
             URL url = new URL(API_URL
                     .concat(SEARCH_PATH)
                     .concat(API_KEY)
-                    .concat(SEARCH_QUERY.concat(mQuery))
+                    .concat(SEARCH_QUERY.concat(encodeQuery(mQuery)))
                     .concat(PAGE_QUERY.concat(mPage)));
 
             mUrlConnection = (HttpURLConnection) url.openConnection();
@@ -59,6 +59,10 @@ public class SearchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
             Log.d("parse error", e.getMessage());
             return new ArrayList<>();
         }
+    }
+
+    private String encodeQuery(String mQuery) {
+        return mQuery.replace(" ","+");
     }
 
     @Override

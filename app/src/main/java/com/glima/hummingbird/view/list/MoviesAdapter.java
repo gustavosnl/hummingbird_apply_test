@@ -47,6 +47,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieItemV
         notifyDataSetChanged();
     }
 
+    public void clear() {
+        movies.clear();
+        notifyDataSetChanged();
+    }
+
     class MovieItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ViewDataBinding viewDataBinding;
         MovieItemViewModel viewModel;

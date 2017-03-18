@@ -1,10 +1,16 @@
 package com.glima.hummingbird.view.list;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -33,6 +39,7 @@ public class SearchResultListActivity extends BaseActivity implements MoviesCall
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("onCreate", getIntent().getStringExtra(QUERY));
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
@@ -40,8 +47,6 @@ public class SearchResultListActivity extends BaseActivity implements MoviesCall
             intent.putExtra(QUERY, savedInstanceState.getString(QUERY));
             setIntent(intent);
         }
-
-        handleIntent(getIntent());
     }
 
     @Override
@@ -73,17 +78,48 @@ public class SearchResultListActivity extends BaseActivity implements MoviesCall
 
     @Override
     protected void onNewIntent(Intent intent) {
+        Log.d("onNewIntent", intent.getStringExtra(QUERY));
         handleIntent(intent);
     }
 
     private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            mQuery = intent.getStringExtra(QUERY);
-            if (mQuery != null)
-                doRequest(1);
+        Bundle bundle = intent.getExtras();
+        if (bundle != null && (mQuery == null || !mQuery.equals(bundle.getString(QUERY)))) {
+            mQuery = bundle.getString(QUERY);
+            ((MoviesAdapter) recyclerView.getAdapter()).clear();
+            doRequest(1);
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mQuery = query;
+                doRequest(1);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(final String newText) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mQuery = newText;
+                        ((MoviesAdapter) recyclerView.getAdapter()).clear();
+                        doRequest(1);
+                    }
+                }, 500);
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override
