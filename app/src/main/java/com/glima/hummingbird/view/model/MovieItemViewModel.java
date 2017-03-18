@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.ImageCallBack;
-import com.glima.hummingbird.network.LoadImageTask;
+import com.glima.hummingbird.network.task.LoadImageTask;
 
 import java.io.Serializable;
 import java.text.DateFormat;

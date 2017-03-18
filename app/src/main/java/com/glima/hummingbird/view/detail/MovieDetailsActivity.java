@@ -29,14 +29,9 @@ public class MovieDetailsActivity extends BaseActivity {
         }
 
         @Override
-        public void onCreate(Bundle bundle) {
-            super.onCreate(bundle);
+        protected void init() {
             viewModel = (MovieItemViewModel) getIntent().getSerializableExtra(BUNDLE_KEY_SHOW);
             ((ActivityMovieDetailBinding) viewDataBinding).setMovie(viewModel);
-        }
-
-        @Override
-        protected void init() {
         }
 
         @Override

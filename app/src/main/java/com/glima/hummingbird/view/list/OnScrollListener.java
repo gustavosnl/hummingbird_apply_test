@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 
 public class OnScrollListener extends RecyclerView.OnScrollListener {
 
-    private OnScrollFinishedCallBack mCallback;
+    private PaginationCallBack mCallback;
     private boolean isLoading = true;
     private int totalItems = 0;
     private int mPage = 1;
 
-    public OnScrollListener(OnScrollFinishedCallBack callBack) {
+    public OnScrollListener(PaginationCallBack callBack) {
         mCallback = callBack;
     }
 

@@ -1,7 +1,6 @@
 package com.glima.hummingbird.view.list;
 
 import android.app.SearchManager;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -14,22 +13,17 @@ import android.widget.ProgressBar;
 import com.glima.hummingbird.R;
 import com.glima.hummingbird.databinding.ActivityMovieListBinding;
 import com.glima.hummingbird.model.Movie;
-import com.glima.hummingbird.network.ListPopularMoviesTask;
 import com.glima.hummingbird.network.MoviesCallBack;
+import com.glima.hummingbird.network.task.ListPopularMoviesTask;
 import com.glima.hummingbird.view.BaseActivity;
 import com.glima.hummingbird.view.model.MovieListViewModel;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements MoviesCallBack, OnScrollFinishedCallBack {
+public class PopularFilmsActivity extends BaseActivity implements MoviesCallBack, PaginationCallBack {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected void init() {
@@ -40,7 +34,11 @@ public class MainActivity extends BaseActivity implements MoviesCallBack, OnScro
         recyclerView.setAdapter(new MoviesAdapter());
         recyclerView.addOnScrollListener(new OnScrollListener(this));
 
-        new ListPopularMoviesTask(this).execute(1);
+        doRequest(1);
+    }
+
+    protected void doRequest(int page) {
+        new ListPopularMoviesTask(this).execute(page);
     }
 
     @Override
@@ -79,6 +77,6 @@ public class MainActivity extends BaseActivity implements MoviesCallBack, OnScro
 
     @Override
     public void loadNextPage(int page) {
-        new ListPopularMoviesTask(this).execute(page);
+        doRequest(page);
     }
 }
