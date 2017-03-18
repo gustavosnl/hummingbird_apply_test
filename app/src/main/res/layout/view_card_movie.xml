@@ -8,7 +8,7 @@
 
         <variable
             name="movie"
-            type="com.glima.hummingbird.view.list.item.MovieItemViewModel" />
+            type="com.glima.hummingbird.view.model.MovieItemViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -16,12 +16,15 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
         tools:layout_margin="16dp"
         tools:layout_width="160dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/movie_thumbnail"
@@ -30,8 +33,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-
+                android:scaleType="fitStart"
                 bind:thumbnailUrl="@{movie.thumbnailUrl}"
                 tools:layout_height="160dp"
                 tools:src="@mipmap/ic_launcher" />
@@ -39,7 +41,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_below="@id/movie_thumbnail"
                 android:orientation="vertical"
                 android:padding="8dp">
