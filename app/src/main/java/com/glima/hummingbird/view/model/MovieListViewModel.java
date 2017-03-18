@@ -1,4 +1,4 @@
-package com.glima.hummingbird.view.list.model;
+package com.glima.hummingbird.view.model;
 
 import com.glima.hummingbird.model.Movie;
 
