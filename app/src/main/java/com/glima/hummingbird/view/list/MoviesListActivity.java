@@ -20,7 +20,9 @@ import com.glima.hummingbird.view.model.MovieListViewModel;
 
 import java.util.List;
 
-public class PopularFilmsActivity extends BaseActivity implements MoviesCallBack, PaginationCallBack {
+import static java.lang.String.valueOf;
+
+public class MoviesListActivity extends BaseActivity implements MoviesCallBack, PaginationCallBack {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -38,7 +40,7 @@ public class PopularFilmsActivity extends BaseActivity implements MoviesCallBack
     }
 
     protected void doRequest(int page) {
-        new ListPopularMoviesTask(this).execute(page);
+        new ListPopularMoviesTask(this).execute(valueOf(page));
     }
 
     @Override

@@ -1,16 +1,9 @@
 package com.glima.hummingbird.network.task;
 
-import android.os.AsyncTask;
-
-import com.glima.hummingbird.BuildConfig;
-import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.MoviesCallBack;
-import com.glima.hummingbird.network.deserialize.MoviesDeserializer;
 
-import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.glima.hummingbird.BuildConfig.API_URL;
 
@@ -18,46 +11,21 @@ import static com.glima.hummingbird.BuildConfig.API_URL;
  * Created by gustavo on 14/03/17.
  */
 
-public class ListPopularMoviesTask extends AsyncTask<Integer, Void, List<Movie>> {
+public class ListPopularMoviesTask extends MoviesTask {
 
-    private final String API_KEY = "?api_key=".concat(BuildConfig.API_KEY);
     private final String POPULAR_MOVIES_PATH = "discover/movie";
     private final String SORT_DESC_QUERY = "&sort_by=popularity.desc";
-    private final String PAGE_QUERY = "&page=";
-    private HttpURLConnection mUrlConnection;
-    private final MoviesCallBack mCallBack;
-    private String mPage = "1";
 
     public ListPopularMoviesTask(MoviesCallBack callBack) {
-        mCallBack = callBack;
+        super(callBack);
     }
 
     @Override
-    protected List<Movie> doInBackground(Integer... params) {
-        if (params != null) {
-            mPage = String.valueOf(params[0]);
-        }
-
-        try {
-            URL url = new URL(API_URL
-                    .concat(POPULAR_MOVIES_PATH)
-                    .concat(API_KEY)
-                    .concat(PAGE_QUERY.concat(mPage))
-                    .concat(SORT_DESC_QUERY));
-
-            mUrlConnection = (HttpURLConnection) url.openConnection();
-            mUrlConnection.setRequestMethod("GET");
-            mUrlConnection.connect();
-
-          return MoviesDeserializer.deserialize(mUrlConnection.getInputStream());
-
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
-    }
-
-    @Override
-    protected void onPostExecute(List<Movie> movies) {
-        mCallBack.onFetchMoviesCompleted(movies);
+    protected URL buildUrl(String... params) throws MalformedURLException {
+        return new URL(API_URL
+                .concat(POPULAR_MOVIES_PATH)
+                .concat(API_KEY)
+                .concat(PAGE_QUERY.concat(params[0]))
+                .concat(SORT_DESC_QUERY));
     }
 }
