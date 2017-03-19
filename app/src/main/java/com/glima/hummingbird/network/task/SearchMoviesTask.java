@@ -21,7 +21,7 @@ import static com.glima.hummingbird.BuildConfig.API_URL;
 
 public class SearchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
     private final String API_KEY = "?api_key=".concat(BuildConfig.API_KEY);
-    private final String SEARCH_PATH = "search/collection";
+    private final String SEARCH_PATH = "search/movie";
     private final String SEARCH_QUERY = "&query=";
     private final String PAGE_QUERY = "&page=";
     private HttpURLConnection mUrlConnection;

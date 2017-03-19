@@ -46,7 +46,6 @@ public class MoviesDeserializer {
                     jsonMovie.optString("backdrop_path"),
                     jsonMovie.optString("release_date")));
         }
-
         return movies;
     }
 }
