@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.glima.hummingbird.model.Movie;
-import com.glima.hummingbird.network.ImageCallBack;
+import com.glima.hummingbird.network.callback.ImageCallBack;
 import com.glima.hummingbird.network.task.LoadImageTask;
 
 import java.io.Serializable;
