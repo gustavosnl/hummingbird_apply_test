@@ -13,4 +13,7 @@ public interface MoviesCallBack {
     void onFetchMoviesCompleted(List<Movie> movies);
 
     void onFetchMoviesError();
+
+    void showProgress();
+
 }
