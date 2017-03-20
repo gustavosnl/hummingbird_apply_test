@@ -1,4 +1,4 @@
-package com.glima.hummingbird.network;
+package com.glima.hummingbird.network.callback;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;

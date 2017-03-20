@@ -1,4 +1,4 @@
-package com.glima.hummingbird.network;
+package com.glima.hummingbird.network.callback;
 
 import com.glima.hummingbird.model.Movie;
 
@@ -11,8 +11,6 @@ import java.util.List;
 public interface MoviesCallBack {
 
     void onFetchMoviesCompleted(List<Movie> movies);
-
-    void onFetchMoviesError();
 
     void showProgress();
 
