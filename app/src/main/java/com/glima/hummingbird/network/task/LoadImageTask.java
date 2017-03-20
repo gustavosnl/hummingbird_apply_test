@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.glima.hummingbird.network.ImageCallBack;
+import com.glima.hummingbird.network.callback.ImageCallBack;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

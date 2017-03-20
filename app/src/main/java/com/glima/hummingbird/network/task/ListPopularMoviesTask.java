@@ -1,6 +1,6 @@
 package com.glima.hummingbird.network.task;
 
-import com.glima.hummingbird.network.MoviesCallBack;
+import com.glima.hummingbird.network.callback.MoviesCallBack;
 
 import java.net.MalformedURLException;
 import java.net.URL;

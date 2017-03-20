@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.glima.hummingbird.BuildConfig;
 import com.glima.hummingbird.model.Movie;
-import com.glima.hummingbird.network.MoviesCallBack;
+import com.glima.hummingbird.network.callback.MoviesCallBack;
 import com.glima.hummingbird.network.deserialize.MoviesDeserializer;
 
 import org.json.JSONException;
@@ -33,6 +33,11 @@ public abstract class MoviesTask extends AsyncTask<String, Void, List<Movie>> {
     }
 
     @Override
+    protected void onPreExecute() {
+        mCallBack.showProgress();
+    }
+
+    @Override
     protected List<Movie> doInBackground(String... params) {
 
         try {
@@ -46,7 +51,6 @@ public abstract class MoviesTask extends AsyncTask<String, Void, List<Movie>> {
             e.printStackTrace();
             return new ArrayList<>();
         }
-
     }
 
     @Override
@@ -55,5 +59,4 @@ public abstract class MoviesTask extends AsyncTask<String, Void, List<Movie>> {
     }
 
     protected abstract URL buildUrl(String... params) throws MalformedURLException;
-
 }
