@@ -2,7 +2,6 @@ package com.glima.hummingbird.view.list;
 
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -42,13 +41,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieItemV
         return movies.size();
     }
 
-    public void attachViewModel(MovieListViewModel viewModel) {
-        movies.addAll(viewModel.getMovies());
-        notifyDataSetChanged();
-    }
-
-    public void clear() {
+    public void reload(MovieListViewModel viewModel) {
         movies.clear();
+        movies.addAll(viewModel.getMovies());
         notifyDataSetChanged();
     }
 
@@ -69,7 +64,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieItemV
 
         @Override
         public void onClick(View v) {
-            Log.d("onclick", "");
             openDetailsActivity(v.getContext(),viewModel);
         }
     }
