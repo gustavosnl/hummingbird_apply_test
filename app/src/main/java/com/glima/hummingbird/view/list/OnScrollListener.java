@@ -26,8 +26,7 @@ public class OnScrollListener extends RecyclerView.OnScrollListener {
         if (dy > 0) {
             int visibleItemCount = layoutManager.getChildCount();
             int totalItemCount = layoutManager.getItemCount();
-            int pastVisibleItems = layoutManager.findFirstCompletelyVisibleItemPosition();
-
+            int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
 
             if (isLoading && totalItemCount > totalItems) {
                 isLoading = false;
