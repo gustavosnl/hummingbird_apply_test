@@ -61,7 +61,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
     private void handleIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         if (bundle != null && (viewModel.getQuery() == null || !viewModel.getQuery().equals(bundle.getString(QUERY)))) {
-           viewModel.updateQuery(bundle.getString(QUERY));
+            viewModel.updateQuery(bundle.getString(QUERY));
             clearList();
             doSearchMoviesRequest(1);
         }
@@ -69,7 +69,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
 
     private void doSearchMoviesRequest(int page) {
         new SearchMoviesTask(this).execute(viewModel.getQuery(), valueOf(page));
-        Log.d("serch",viewModel.getQuery());
+        Log.d("serch", viewModel.getQuery());
     }
 
     protected void doPopularMoviesRequest(int page) {
@@ -150,10 +150,10 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
     }
 
     private void doRequest() {
-        if (!viewModel.isSearch() ) {
-            doPopularMoviesRequest(1);
-        } else {
+        if (viewModel.isSearch()) {
             doSearchMoviesRequest(1);
+        } else {
+            doPopularMoviesRequest(1);
         }
     }
 }

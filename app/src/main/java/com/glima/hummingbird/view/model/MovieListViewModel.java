@@ -11,7 +11,7 @@ import java.util.List;
  * Created by gustavo on 15/03/17.
  */
 
-public class MovieListViewModel extends BaseObservable{
+public class MovieListViewModel extends BaseObservable {
 
     private List<Movie> mMovies = new ArrayList<>();
     private String mQuery = "";
@@ -38,6 +38,7 @@ public class MovieListViewModel extends BaseObservable{
 
     public void addMovies(List<Movie> movies) {
         mMovies.addAll(movies);
+        notifyChange();
     }
 
     public void updateQuery(String query) {
