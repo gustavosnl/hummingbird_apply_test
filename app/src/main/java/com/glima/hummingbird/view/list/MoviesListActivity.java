@@ -34,6 +34,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
     private ProgressBar progressBar;
     private MovieListViewModel viewModel;
     private Handler mHandler;
+    private OnScrollListener mListener;
 
     @Override
     protected void init() {
@@ -42,7 +43,8 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
         recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.column_span_count)));
         recyclerView.addItemDecoration(new ListDividerDecoration(this));
         recyclerView.setAdapter(new MoviesAdapter());
-        recyclerView.addOnScrollListener(new OnScrollListener(this));
+        mListener = new OnScrollListener(this);
+        recyclerView.addOnScrollListener(mListener);
 
         mHandler = new Handler();
         viewModel = new MovieListViewModel();
@@ -146,6 +148,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
     }
 
     private void clearList() {
+        mListener.resetPagination();
         viewModel.clearList();
     }
 

@@ -51,5 +51,6 @@ public class MovieListViewModel extends BaseObservable {
 
     public void clearList() {
         mMovies.clear();
+        notifyChange();
     }
 }

@@ -12,10 +12,11 @@ public class OnScrollListener extends RecyclerView.OnScrollListener {
     private PaginationCallBack mCallback;
     private boolean isLoading = true;
     private int totalItems = 0;
-    private int mPage = 1;
+    private int mPage;
 
     public OnScrollListener(PaginationCallBack callBack) {
         mCallback = callBack;
+        mPage = 1;
     }
 
     @Override
@@ -28,15 +29,21 @@ public class OnScrollListener extends RecyclerView.OnScrollListener {
             int totalItemCount = layoutManager.getItemCount();
             int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
 
-            if (isLoading && totalItemCount > totalItems) {
-                isLoading = false;
-                totalItems = totalItemCount;
-            }
-
             if (!isLoading && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
                 mCallback.loadNextPage(++mPage);
                 isLoading = true;
             }
+
+            if (isLoading && totalItemCount > totalItems) {
+                isLoading = false;
+                totalItems = totalItemCount;
+            }
         }
+    }
+
+    public void resetPagination() {
+        mPage = 1;
+        totalItems = 0;
+        isLoading = true;
     }
 }
