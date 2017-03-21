@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 public class OnScrollListener extends RecyclerView.OnScrollListener {
 
     private PaginationCallBack mCallback;
-    private boolean isLoading = true;
-    private int totalItems = 0;
+    private boolean mIsLoading = true;
+    private int mTotalItems = 0;
     private int mPage;
 
     public OnScrollListener(PaginationCallBack callBack) {
@@ -29,21 +29,21 @@ public class OnScrollListener extends RecyclerView.OnScrollListener {
             int totalItemCount = layoutManager.getItemCount();
             int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
 
-            if (!isLoading && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
+            if (!mIsLoading && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
                 mCallback.loadNextPage(++mPage);
-                isLoading = true;
+                mIsLoading = true;
             }
 
-            if (isLoading && totalItemCount > totalItems) {
-                isLoading = false;
-                totalItems = totalItemCount;
+            if (mIsLoading && totalItemCount > mTotalItems) {
+                mIsLoading = false;
+                mTotalItems = totalItemCount;
             }
         }
     }
 
     public void resetPagination() {
         mPage = 1;
-        totalItems = 0;
-        isLoading = true;
+        mTotalItems = 0;
+        mIsLoading = true;
     }
 }

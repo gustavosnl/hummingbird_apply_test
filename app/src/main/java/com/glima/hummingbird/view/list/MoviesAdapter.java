@@ -16,7 +16,7 @@ import java.util.List;
 
 import static android.databinding.DataBindingUtil.inflate;
 import static android.view.LayoutInflater.from;
-import static com.glima.hummingbird.FlowController.openDetailsActivity;
+import static com.glima.hummingbird.flow.FlowController.openDetailsActivity;
 
 /**
  * Created by gustavo on 15/03/17.

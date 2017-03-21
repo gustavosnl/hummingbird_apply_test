@@ -17,7 +17,7 @@ import static android.graphics.BitmapFactory.decodeStream;
 
 public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-    private HttpURLConnection urlConnection;
+    private HttpURLConnection mUrlConnection;
     private ImageCallBack mCallback;
     private ImageView mImageView;
 
@@ -31,9 +31,9 @@ public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         try {
             URL url = new URL(params[0]);
-            urlConnection = (HttpURLConnection) url.openConnection();
+            mUrlConnection = (HttpURLConnection) url.openConnection();
 
-            return decodeStream(urlConnection.getInputStream());
+            return decodeStream(mUrlConnection.getInputStream());
 
         } catch (java.io.IOException e) {
             e.printStackTrace();

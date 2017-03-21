@@ -17,7 +17,7 @@ import com.glima.hummingbird.view.model.MovieItemViewModel;
 public class MovieDetailsActivity extends BaseActivity {
         private static final String BUNDLE_KEY_SHOW = "movie";
 
-        private MovieItemViewModel viewModel;
+        private MovieItemViewModel mViewModel;
 
         public static Intent newIntent(Context context, MovieItemViewModel movie) {
             Intent intent = new Intent(context, MovieDetailsActivity.class);
@@ -30,13 +30,13 @@ public class MovieDetailsActivity extends BaseActivity {
 
         @Override
         protected void init() {
-            viewModel = (MovieItemViewModel) getIntent().getSerializableExtra(BUNDLE_KEY_SHOW);
-            ((ActivityMovieDetailBinding) viewDataBinding).setMovie(viewModel);
+            mViewModel = (MovieItemViewModel) getIntent().getSerializableExtra(BUNDLE_KEY_SHOW);
+            ((ActivityMovieDetailBinding) mViewDataBinding).setMovie(mViewModel);
         }
 
         @Override
         protected void setupToolbar() {
-            Toolbar toolbar = ((ActivityMovieDetailBinding) viewDataBinding).collapsingToolbar.toolbar;
+            Toolbar toolbar = ((ActivityMovieDetailBinding) mViewDataBinding).collapsingToolbar.toolbar;
             setSupportActionBar(toolbar);
         }
 

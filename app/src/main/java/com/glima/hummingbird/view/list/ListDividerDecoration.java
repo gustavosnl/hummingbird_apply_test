@@ -12,17 +12,17 @@ import com.glima.hummingbird.R;
  */
 
 public class ListDividerDecoration extends RecyclerView.ItemDecoration {
-    private final Context context;
+    private final Context mContext;
 
     public ListDividerDecoration(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        outRect.bottom = context.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
-        outRect.left = context.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
-        outRect.right = context.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
-        outRect.top = context.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
+        outRect.bottom = mContext.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
+        outRect.left = mContext.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
+        outRect.right = mContext.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
+        outRect.top = mContext.getResources().getDimensionPixelSize(R.dimen.list_default_separator);
     }
 }

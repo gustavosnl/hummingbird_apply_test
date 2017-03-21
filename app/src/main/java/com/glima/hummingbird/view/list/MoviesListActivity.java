@@ -30,25 +30,25 @@ import static java.lang.String.valueOf;
 
 public class MoviesListActivity extends BaseActivity implements MoviesCallBack, PaginationCallBack {
 
-    private RecyclerView recyclerView;
-    private ProgressBar progressBar;
-    private MovieListViewModel viewModel;
+    private RecyclerView mList;
+    private ProgressBar mProgress;
+    private MovieListViewModel mViewModel;
     private Handler mHandler;
     private OnScrollListener mListener;
 
     @Override
     protected void init() {
-        progressBar = ((ActivityMovieListBinding) viewDataBinding).progressBar;
-        recyclerView = ((ActivityMovieListBinding) viewDataBinding).movieList;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.column_span_count)));
-        recyclerView.addItemDecoration(new ListDividerDecoration(this));
-        recyclerView.setAdapter(new MoviesAdapter());
+        mProgress = ((ActivityMovieListBinding) mViewDataBinding).progressBar;
+        mList = ((ActivityMovieListBinding) mViewDataBinding).movieList;
+        mList.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.column_span_count)));
+        mList.addItemDecoration(new ListDividerDecoration(this));
+        mList.setAdapter(new MoviesAdapter());
         mListener = new OnScrollListener(this);
-        recyclerView.addOnScrollListener(mListener);
+        mList.addOnScrollListener(mListener);
 
         mHandler = new Handler();
-        viewModel = new MovieListViewModel();
-        ((ActivityMovieListBinding) viewDataBinding).setMovieList(viewModel);
+        mViewModel = new MovieListViewModel();
+        ((ActivityMovieListBinding) mViewDataBinding).setMovieList(mViewModel);
 
         doRequest();
     }
@@ -62,16 +62,16 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
 
     private void handleIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
-        if (bundle != null && (viewModel.getQuery() == null || !viewModel.getQuery().equals(bundle.getString(QUERY)))) {
-            viewModel.updateQuery(bundle.getString(QUERY));
+        if (bundle != null && (mViewModel.getQuery() == null || !mViewModel.getQuery().equals(bundle.getString(QUERY)))) {
+            mViewModel.updateQuery(bundle.getString(QUERY));
             clearList();
             doSearchMoviesRequest(1);
         }
     }
 
     private void doSearchMoviesRequest(int page) {
-        new SearchMoviesTask(this).execute(viewModel.getQuery(), valueOf(page));
-        Log.d("serch", viewModel.getQuery());
+        new SearchMoviesTask(this).execute(mViewModel.getQuery(), valueOf(page));
+        Log.d("serch", mViewModel.getQuery());
     }
 
     protected void doPopularMoviesRequest(int page) {
@@ -80,7 +80,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
 
     @Override
     protected void setupToolbar() {
-        Toolbar toolbar = ((ActivityMovieListBinding) viewDataBinding).includeToolbar.toolbar;
+        Toolbar toolbar = ((ActivityMovieListBinding) mViewDataBinding).includeToolbar.toolbar;
         setSupportActionBar(toolbar);
     }
 
@@ -102,19 +102,19 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
 
     @Override
     public void onFetchMoviesCompleted(List<Movie> movies) {
-        viewModel.addMovies(movies);
-        ((MoviesAdapter) recyclerView.getAdapter()).reload(viewModel);
-        progressBar.setVisibility(View.GONE);
+        mViewModel.addMovies(movies);
+        ((MoviesAdapter) mList.getAdapter()).reload(mViewModel);
+        mProgress.setVisibility(View.GONE);
     }
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+        mProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void loadNextPage(int page) {
-        if (viewModel.isQueryEmpty()) {
+        if (mViewModel.isQueryEmpty()) {
             doPopularMoviesRequest(page);
         } else {
             doSearchMoviesRequest(page);
@@ -125,7 +125,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
         return new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                viewModel.updateQuery(query);
+                mViewModel.updateQuery(query);
                 doRequest();
                 return false;
             }
@@ -137,7 +137,7 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        viewModel.updateQuery(newText);
+                        mViewModel.updateQuery(newText);
                         doRequest();
                         Log.d("textChanged", newText);
                     }
@@ -149,11 +149,11 @@ public class MoviesListActivity extends BaseActivity implements MoviesCallBack, 
 
     private void clearList() {
         mListener.resetPagination();
-        viewModel.clearList();
+        mViewModel.clearList();
     }
 
     private void doRequest() {
-        if (viewModel.isSearch()) {
+        if (mViewModel.isSearch()) {
             doSearchMoviesRequest(1);
         } else {
             doPopularMoviesRequest(1);
