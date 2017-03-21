@@ -12,13 +12,9 @@
     </data>
 
     <android.support.v7.widget.CardView
+        style="@style/MovieCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
         tools:layout_margin="16dp">
 
         <LinearLayout
@@ -27,36 +23,28 @@
             android:orientation="vertical">
 
             <ImageView
+                style="@style/MovieCardThumbnail"
                 android:id="@+id/movie_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
                 bind:thumbnailUrl="@{movie.thumbnailUrl}"
                 tools:layout_height="160dp"
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView
+                style="@style/MovieCardTitle"
                 android:id="@+id/movie_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif"
-                android:maxLines="2"
                 android:text="@{movie.title}"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 tools:text="Power Rangers" />
 
             <TextView
+                style="@style/MovieCardYear"
                 android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
                 android:text="@{movie.year}"
-                android:layout_margin="4dp"
-                android:textSize="12sp"
                 tools:text="2017" />
 
 
