@@ -43,6 +43,10 @@ public class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
-        mCallback.onMovieImageDownloadCompleted(bitmap, mImageView);
+        if (bitmap != null) {
+            mCallback.onMovieImageDownloadCompleted(bitmap, mImageView);
+        } else {
+            mCallback.onMovieImageDownloadError(mImageView);
+        }
     }
 }

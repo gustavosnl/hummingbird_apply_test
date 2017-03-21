@@ -11,5 +11,5 @@ public interface ImageCallBack {
 
     void onMovieImageDownloadCompleted(Bitmap movieImage, ImageView imageView);
 
-    void onMovieImageDownloadError();
+    void onMovieImageDownloadError(ImageView imageView);
 }

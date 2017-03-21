@@ -1,9 +1,12 @@
 package com.glima.hummingbird.view.model;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.glima.hummingbird.R;
 import com.glima.hummingbird.model.Movie;
 import com.glima.hummingbird.network.callback.ImageCallBack;
 import com.glima.hummingbird.network.task.LoadImageTask;
@@ -13,6 +16,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import static android.support.v4.content.ContextCompat.getDrawable;
 import static com.glima.hummingbird.BuildConfig.API_IMG_URL;
 import static java.util.Locale.US;
 
@@ -73,8 +77,9 @@ public class MovieItemViewModel implements Serializable {
         }
 
         @Override
-        public void onMovieImageDownloadError() {
-
+        public void onMovieImageDownloadError(ImageView imageView) {
+            Context context = imageView.getContext();
+            imageView.setImageDrawable(getDrawable(context, R.drawable.poster_placeholder));
         }
     }
 }
