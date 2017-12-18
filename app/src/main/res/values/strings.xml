@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HummingBird Application Test</string>
+    <string name="label_sinopsys">Synopsis</string>
+    <string name="launch_year">year: %s</string>
+    <string name="search_title">Search for a Movie</string>
+    <string name="search_hint">search</string>
+    <string name="movie_not_found">No results found for: %s</string>
+
+</resources>

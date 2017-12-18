@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "poster_path": "/45Y1G5FEgttPAwjTYic6czC9xCn.jpg",
+      "adult": false,
+      "overview": "In the near future, a weary Logan cares for an ailing Professor X in a hide out on the Mexican border. But Logan's attempts to hide from the world and his legacy are up-ended when a young mutant arrives, being pursued by dark forces.",
+      "release_date": "2017-02-28",
+      "genre_ids": [
+        28,
+        18,
+        878
+      ],
+      "id": 263115,
+      "original_title": "Logan",
+      "original_language": "en",
+      "title": "Logan",
+      "backdrop_path": "/5pAGnkFYSsFJ99ZxDIYnhQbQFXs.jpg",
+      "popularity": 158.373597,
+      "vote_count": 1433,
+      "video": false,
+      "vote_average": 7.7
+    },
+    {
+      "poster_path": "/z09QAf8WbZncbitewNk6lKYMZsh.jpg",
+      "adult": false,
+      "overview": "Dory is reunited with her friends Nemo and Marlin in the search for answers about her past. What can she remember? Who are her parents? And where did she learn to speak Whale?",
+      "release_date": "2016-06-16",
+      "genre_ids": [
+        16,
+        10751
+      ],
+      "id": 127380,
+      "original_title": "Finding Dory",
+      "original_language": "en",
+      "title": "Finding Dory",
+      "backdrop_path": "/iWRKYHTFlsrxQtfQqFOQyceL83P.jpg",
+      "popularity": 107.761696,
+      "vote_count": 2716,
+      "video": false,
+      "vote_average": 6.7
+    },
+    {
+      "poster_path": "/aoUyphk4nwffrwlZRaOa0eijgpr.jpg",
+      "adult": false,
+      "overview": "Explore the mysterious and dangerous home of the king of the apes as a team of explorers ventures deep inside the treacherous, primordial island.",
+      "release_date": "2017-03-08",
+      "genre_ids": [
+        878,
+        28,
+        12,
+        14
+      ],
+      "id": 293167,
+      "original_title": "Kong: Skull Island",
+      "original_language": "en",
+      "title": "Kong: Skull Island",
+      "backdrop_path": "/pGwChWiAY1bdoxL79sXmaFBlYJH.jpg",
+      "popularity": 87.255864,
+      "vote_count": 489,
+      "video": false,
+      "vote_average": 6.1
+    },
+    {
+      "poster_path": "/s9ye87pvq2IaDvjv9x4IOXVjvA7.jpg",
+      "adult": false,
+      "overview": "A koala named Buster recruits his best friend to help him drum up business for his theater by hosting a singing competition.",
+      "release_date": "2016-12-02",
+      "genre_ids": [
+        16,
+        35,
+        18,
+        10751,
+        10402
+      ],
+      "id": 335797,
+      "original_title": "Sing",
+      "original_language": "en",
+      "title": "Sing",
+      "backdrop_path": "/usJKCEMXV3tECgIJj8ZTEndmY2E.jpg",
+      "popularity": 64.857729,
+      "vote_count": 800,
+      "video": false,
+      "vote_average": 6.7
+    }
+  ]
+}
